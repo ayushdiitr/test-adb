@@ -8,9 +8,11 @@ export function App() {
   const [toDoText, setToDoText] = useState("");
   const [todos, setTodos] = useState([]);
 
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
   const getAllTodos = async() => {
     try {
-      const res = await fetch('http://localhost:8000/todos/');
+      const res = await fetch(`${apiUrl}/todos/`);
       const response = await res.json();
       setTodos(response);
       return response;
@@ -27,7 +29,7 @@ export function App() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8000/todos/',{
+      const response = await fetch(`${apiUrl}/todos/`,{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
